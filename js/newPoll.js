@@ -42,7 +42,7 @@ function createNewPoll(event){
     ajax.onload = function(){
         const data = JSON.parse(this.responseText);
         if (data.hasOwnProperty('success')) {
-           alert('onnistui');
+           window.location.href = "index.php?type=succes&msg=New poll inserted!"
         } else {
             showMessage('error', data.error);
         }         
