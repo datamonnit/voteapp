@@ -2,7 +2,7 @@
 
 window.addEventListener('load', getPolls);
 
-const data;
+let data = null;
 
 
 /* 
@@ -19,18 +19,68 @@ function getPolls(){
     ajax.send();
 }
 
-function showPolls(data){
+function showPolls(data, type = 'current'){
     
     const ul = document.getElementById("votesUl");
+    ul.innerHTML = "";
 
+    const now = new Date();
+    console.log(`now: ${now.toDateString()}`);
+    
     data.forEach(poll => {
-        const newLi = document.createElement('li');
-        newLi.classList.add('list-group-item');
+        
+        let start = false;
+        let end = false;
 
-        const liText = document.createTextNode(poll.topic);
-        newLi.appendChild(liText);
+        if (poll.start != '0000-00-00 00:00:00') {
+            start = new Date(poll.start);
+        }
 
-        ul.appendChild(newLi);
+        if (poll.end != '0000-00-00 00:00:00') {
+            end = new Date(poll.end);       
+        }
+        
+        // console.log(`start: ${start.toDateString()} end: ${end.toDateString()}`);
+        
+        if (type == 'old') {
+            
+            if (end < now && end != false) {
+                const newLi = document.createElement('li');
+                newLi.classList.add('list-group-item');
+        
+                const liText = document.createTextNode(poll.topic);
+                newLi.appendChild(liText);
+        
+                ul.appendChild(newLi);
+            }
+        
+        } else if (type == 'future') {
+
+            if (start > now) {
+                
+                const newLi = document.createElement('li');
+                newLi.classList.add('list-group-item');
+        
+                const liText = document.createTextNode(poll.topic);
+                newLi.appendChild(liText);
+        
+                ul.appendChild(newLi);
+            
+            }
+
+        } else {
+
+            if ((start == false || start <= now) && (end == false || end >= now)) {
+                const newLi = document.createElement('li');
+                newLi.classList.add('list-group-item');
+        
+                const liText = document.createTextNode(poll.topic);
+                newLi.appendChild(liText);
+        
+                ul.appendChild(newLi);
+            }
+        }
+
 
     });
 }
