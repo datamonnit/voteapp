@@ -25,7 +25,6 @@ function showPolls(data, type = 'current'){
     ul.innerHTML = "";
 
     const now = new Date();
-    console.log(`now: ${now.toDateString()}`);
     
     data.forEach(poll => {
         
@@ -39,8 +38,6 @@ function showPolls(data, type = 'current'){
         if (poll.end != '0000-00-00 00:00:00') {
             end = new Date(poll.end);       
         }
-        
-        // console.log(`start: ${start.toDateString()} end: ${end.toDateString()}`);
         
         if (type == 'old') {
             
