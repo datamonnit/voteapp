@@ -25,7 +25,7 @@ function loginUser(event){
         const data = JSON.parse(this.responseText);
         console.log(data);
         if (data.hasOwnProperty('success')){
-            window.location.href = "admin.php?type=success&msg=Wellcome";
+            window.location.href = "index.php?type=success&msg=Wellcome";
             return;
         } else {
             showMessage('error','Kirjautuminen epäonnistui!');
