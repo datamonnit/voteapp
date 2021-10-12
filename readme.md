@@ -1,1 +1,1 @@
-# Tauko! Jatketaan klo 11:45
+# VoteApp teema
